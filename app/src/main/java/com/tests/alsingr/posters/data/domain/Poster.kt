@@ -10,4 +10,6 @@ data class Poster (@ColumnInfo(name = "albumId")  val albumId: Int,
                    @ColumnInfo(name = "title") val title: String,
                    @ColumnInfo(name = "url") val url: String,
                    @ColumnInfo(name = "thumbnailUrl") val thumbnailUrl: String){
+
+    override fun toString() = "${albumId} ${id} ${title}"
 }
