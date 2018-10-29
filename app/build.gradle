@@ -1,0 +1,102 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+    defaultConfig {
+        applicationId "com.tests.alsingr.posters"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        androidTest.java.srcDirs += "src/test-common/java"
+        test.java.srcDirs += "src/test-common/java"
+    }
+}
+
+
+dependencies {
+    kapt deps.room.compiler
+    kapt deps.glide.compiler
+
+    implementation deps.constraint_layout
+    implementation deps.support.app_compat
+    implementation deps.support.recyclerview
+    implementation deps.support.cardview
+    implementation deps.support.design
+    implementation deps.room.runtime
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.extensions
+    implementation deps.kotlin.stdlib
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.gson
+    implementation deps.glide.runtime
+
+    // Android Testing Support Library's runner and rules
+    androidTestImplementation deps.arch_core.testing
+
+    androidTestImplementation deps.junit
+    androidTestImplementation deps.retrofit.mock
+    androidTestImplementation deps.mockito.core
+    androidTestImplementation deps.mockito.android
+
+    testImplementation deps.junit
+    testImplementation deps.retrofit.mock
+    testImplementation deps.arch_core.testing
+    testImplementation deps.mockito.core
+}
+
+
+
+
+
+
+//apply plugin: 'com.android.application'
+//
+//apply plugin: 'kotlin-android'
+//
+//apply plugin: 'kotlin-android-extensions'
+//
+//android {
+//    compileSdkVersion 28
+//    defaultConfig {
+//        applicationId "com.tests.alsingr.posters"
+//        minSdkVersion 15
+//        targetSdkVersion 28
+//        versionCode 1
+//        versionName "1.0"
+//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//    }
+//    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        }
+//    }
+//}
+//
+//dependencies {
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    implementation 'com.android.support:appcompat-v7:28.0.0'
+//    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+//    implementation 'com.android.support:design:28.0.0'
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+//}
