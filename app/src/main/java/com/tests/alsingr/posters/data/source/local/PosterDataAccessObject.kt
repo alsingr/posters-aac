@@ -24,7 +24,7 @@ interface PosterDataAccessObject {
 
 
     @Query("SELECT * FROM posters WHERE id = :posterId")
-    fun getPoster(posterId: String): LiveData<Poster>
+    fun fetchPoster(posterId: String): LiveData<Poster>
 
     /**
      * Insert posters in the database.
