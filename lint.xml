@@ -1,0 +1,8 @@
+nt>
+    <issue id="GoogleAppIndexWarning" severity="ignore" />
+
+    <issue id="InvalidPackage" severity="error">
+        <ignore regexp="okio.*jar" />
+        <ignore regexp="retrofit.*jar" />
+    </issue>
+</lint>

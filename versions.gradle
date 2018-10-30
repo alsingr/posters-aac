@@ -15,6 +15,7 @@ versions.apache_commons = "2.5"
 versions.mockito = "2.7.19"
 versions.mockito_all = "1.10.19"
 versions.mockito_android = "2.22.0"
+versions.dexmaker = "2.2.0"
 versions.constraint_layout = "2.0.0-alpha2"
 versions.glide = "4.8.0"
 versions.timber = "4.5.1"
@@ -100,6 +101,7 @@ def glide = [:]
 glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
 glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
 deps.glide = glide
+deps.dexmaker = "com.linkedin.dexmaker:dexmaker-mockito:$versions.dexmaker"
 deps.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
 deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 deps.junit = "junit:junit:$versions.junit"
@@ -134,6 +136,7 @@ ext.deps = deps
 def addRepos(RepositoryHandler handler) {
     handler.google()
     handler.jcenter()
+    handler.maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
     handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 ext.addRepos = this.&addRepos
