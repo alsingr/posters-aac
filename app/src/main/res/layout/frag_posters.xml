@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="hasPosters"
+                type="Boolean" />
+
+        <variable
+                name="isFinishedWithError"
+                type="Boolean" />
+
+    </data>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/posters_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingLeft="@dimen/page_margin"
+                android:paddingRight="@dimen/page_margin"
+                app:isGone="@{!hasPosters}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/list_item_poster"/>
+
+        <TextView
+                android:id="@+id/empty_poster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/posters_empty"
+                app:isGone="@{hasPosters}"
+                android:textSize="24sp" />
+
+        <TextView
+                android:id="@+id/error_message_poster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/posters_error_occured"
+                app:isGone="@{!isFinishedWithError}"
+                android:textSize="24sp" />
+
+    </FrameLayout>
+
+</layout>

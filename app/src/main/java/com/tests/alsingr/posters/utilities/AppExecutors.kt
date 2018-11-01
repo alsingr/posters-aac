@@ -50,4 +50,17 @@ open class AppExecutors(
             mainThreadHandler.post(command)
         }
     }
+
+    companion object {
+
+        // For Singleton instantiation
+        @Volatile private var instance: AppExecutors? = null
+
+        fun getInstance(diskIO: Executor = Executors.newSingleThreadExecutor(),
+                        networkIO: Executor = Executors.newFixedThreadPool(3),
+                        mainThread: Executor = MainThreadExecutor()) =
+            instance ?: synchronized(this) {
+                instance ?: AppExecutors(diskIO, networkIO, mainThread).also { instance = it }
+            }
+    }
 }

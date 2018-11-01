@@ -7,11 +7,11 @@ import com.tests.alsingr.posters.data.source.local.AppDatabase
 import com.tests.alsingr.posters.data.source.local.PosterDataAccessObject
 import com.tests.alsingr.posters.data.source.remote.PosterService
 import com.tests.alsingr.posters.utilities.AppExecutors
+import timber.log.Timber
 import javax.inject.Inject
 
-class PostersRepository @Inject constructor(
+class PostersRepository (
     private val appExecutors: AppExecutors,
-    private val db: AppDatabase,
     private val posterDao: PosterDataAccessObject,
     private val postersService: PosterService
 ) {
@@ -31,7 +31,21 @@ class PostersRepository @Inject constructor(
             override fun createCall() = postersService.getPosters()
 
             override fun onFetchFailed() {
+                Timber.w("Failed")
             }
         }.asLiveData()
+    }
+
+    companion object {
+
+        // For Singleton instantiation
+        @Volatile private var instance: PostersRepository? = null
+
+        fun getInstance(appExecutors: AppExecutors,
+                        posterDao: PosterDataAccessObject,
+                        postersService: PosterService) =
+            instance ?: synchronized(this) {
+                instance ?: PostersRepository(appExecutors, posterDao, postersService).also { instance = it }
+            }
     }
 }

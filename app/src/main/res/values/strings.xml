@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Posters</string>
     <string name="image_description">An image from the list of results for a search query</string>
+    <string name="posters_empty">Il n\'y a pas d\'affiches</string>
+    <string name="posters_loading">Chargement des affiches</string>
+    <string name="posters_error_occured">Une erreur est survenue lors du chargement des affiches</string>
+
+
 </resources>

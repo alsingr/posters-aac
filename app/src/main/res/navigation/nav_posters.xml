@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            app:startDestination="@+id/posters_fragment">
+
+    <fragment
+            android:id="@+id/posters_fragment"
+            android:name="com.tests.alsingr.posters.ui.list.PostersFragment"
+            android:label="Pooo"
+            tools:layout="@layout/frag_posters" />
+
+
+</navigation>

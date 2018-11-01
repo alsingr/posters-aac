@@ -28,7 +28,7 @@ class PostersLocalDataSourceTest {
         database = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         posterDAO = database.posterDAO()
 
-        // Insert plants in non-alphabetical order to test that results are sorted by name
+        // Insert posters in non-alphabetical order to test that results are sorted by name
         posterDAO.insertAll(testPosters)
     }
 
