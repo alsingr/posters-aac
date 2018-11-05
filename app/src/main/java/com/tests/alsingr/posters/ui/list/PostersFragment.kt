@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tests.alsingr.posters.adapters.PosterAdapter
+import com.tests.alsingr.posters.data.domain.Poster
+import com.tests.alsingr.posters.data.domain.Resource
 import com.tests.alsingr.posters.data.domain.Status
 import com.tests.alsingr.posters.databinding.FragPostersBinding
 import com.tests.alsingr.posters.utilities.InjectorUtils
@@ -34,14 +36,36 @@ class PostersFragment : Fragment() {
         val viewModel = ViewModelProviders.of(this, factory)
             .get(PosterListViewModel::class.java)
         viewModel.posters.observe(viewLifecycleOwner, Observer { posters ->
-            binding.hasPosters = (posters != null && posters.status == Status.SUCCESS && posters.data?.isNotEmpty() ?: false)
-            if (binding.hasPosters == true) {
-               adapter.submitList(posters.data)
+            when (posters.status) {
+                Status.SUCCESS -> displayPostersIfNeeded(binding, posters.data, adapter)
+                Status.LOADING -> displayLoadingMessage(binding)
+                Status.ERROR -> displayErrorMessage(binding)
             }
-            binding.isFinishedWithError = (posters != null && posters.status == Status.ERROR)
-            Timber.w("HasPosters ${binding.hasPosters}")
-
         })
+    }
+
+    private fun displayPostersIfNeeded(binding: FragPostersBinding, data: List<Poster>?, adapter: PosterAdapter) {
+        binding.isFinishedWithError = false
+        binding.isLoading = false
+        if (data != null && data.isNotEmpty()) {
+            binding.hasPosters = true
+            adapter.submitList(data)
+        }else {
+            // display no posters message
+            binding.hasPosters = false
+        }
+    }
+
+    private fun displayErrorMessage(binding: FragPostersBinding) {
+        binding.isFinishedWithError = true
+        binding.isLoading = false
+        binding.hasPosters = true
+    }
+
+    private fun displayLoadingMessage(binding: FragPostersBinding) {
+        binding.isLoading = true
+        binding.isFinishedWithError = false
+        binding.hasPosters = true
     }
 
 }

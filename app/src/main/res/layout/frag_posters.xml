@@ -12,6 +12,9 @@
         <variable
                 name="isFinishedWithError"
                 type="Boolean" />
+        <variable
+                name="isLoading"
+                type="Boolean" />
 
     </data>
 
@@ -46,6 +49,14 @@
                 android:gravity="center"
                 android:text="@string/posters_error_occured"
                 app:isGone="@{!isFinishedWithError}"
+                android:textSize="24sp" />
+        <TextView
+                android:id="@+id/loading_message_poster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/posters_loading"
+                app:isGone="@{!isLoading}"
                 android:textSize="24sp" />
 
     </FrameLayout>
