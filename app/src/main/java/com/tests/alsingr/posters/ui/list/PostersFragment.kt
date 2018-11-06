@@ -1,6 +1,7 @@
 package com.tests.alsingr.posters.ui.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.tests.alsingr.posters.data.domain.Poster
 import com.tests.alsingr.posters.data.domain.Resource
 import com.tests.alsingr.posters.data.domain.Status
 import com.tests.alsingr.posters.databinding.FragPostersBinding
+import com.tests.alsingr.posters.ui.shared.RetryCallback
 import com.tests.alsingr.posters.utilities.InjectorUtils
 import com.tests.alsingr.posters.viewmodels.PosterListViewModel
 import timber.log.Timber
@@ -25,6 +27,7 @@ class PostersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragPostersBinding.inflate(inflater, container, false)
+
         val adapter = PosterAdapter()
         binding.postersList.adapter = adapter
         subscribeUI(adapter, binding)
@@ -35,37 +38,54 @@ class PostersFragment : Fragment() {
         val factory = InjectorUtils.providePostersViewModelFactory(requireContext())
         val viewModel = ViewModelProviders.of(this, factory)
             .get(PosterListViewModel::class.java)
-        viewModel.posters.observe(viewLifecycleOwner, Observer { posters ->
-            when (posters.status) {
-                Status.SUCCESS -> displayPostersIfNeeded(binding, posters.data, adapter)
-                Status.LOADING -> displayLoadingMessage(binding)
-                Status.ERROR -> displayErrorMessage(binding)
+
+        binding.retryCallback = object : RetryCallback {
+            override fun retry() {
+                viewModel.retry()
             }
-        })
-    }
-
-    private fun displayPostersIfNeeded(binding: FragPostersBinding, data: List<Poster>?, adapter: PosterAdapter) {
-        binding.isFinishedWithError = false
-        binding.isLoading = false
-        if (data != null && data.isNotEmpty()) {
-            binding.hasPosters = true
-            adapter.submitList(data)
-        }else {
-            // display no posters message
-            binding.hasPosters = false
         }
+
+        viewModel.posters.observe(viewLifecycleOwner, Observer { posters ->
+            binding.postersResource = posters
+            Log.d("JJJ", posters.toString())
+            if (posters.data != null && posters.data.isNotEmpty()) {
+                binding.hasPosters = true
+                adapter.submitList(posters.data)
+            }else {
+                // display no posters message
+                binding.hasPosters = false
+            }
+//            when (posters.status) {
+//                Status.SUCCESS -> displayPostersIfNeeded(binding, posters.data, adapter)
+//                Status.LOADING -> displayLoadingMessage(binding)
+//                Status.ERROR -> displayErrorMessage(binding)
+//            }
+        })
+        viewModel.retry()
     }
 
-    private fun displayErrorMessage(binding: FragPostersBinding) {
-        binding.isFinishedWithError = true
-        binding.isLoading = false
-        binding.hasPosters = true
-    }
-
-    private fun displayLoadingMessage(binding: FragPostersBinding) {
-        binding.isLoading = true
-        binding.isFinishedWithError = false
-        binding.hasPosters = true
-    }
+//    private fun displayPostersIfNeeded(binding: FragPostersBinding, data: List<Poster>?, adapter: PosterAdapter) {
+//        binding.isFinishedWithError = false
+//        binding.isLoading = false
+//        if (data != null && data.isNotEmpty()) {
+//            binding.hasPosters = true
+//            adapter.submitList(data)
+//        }else {
+//            // display no posters message
+//            binding.hasPosters = false
+//        }
+//    }
+//
+//    private fun displayErrorMessage(binding: FragPostersBinding) {
+//        binding.isFinishedWithError = true
+//        binding.isLoading = false
+//        binding.hasPosters = true
+//    }
+//
+//    private fun displayLoadingMessage(binding: FragPostersBinding) {
+//        binding.isLoading = true
+//        binding.isFinishedWithError = false
+//        binding.hasPosters = true
+//    }
 
 }
