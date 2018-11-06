@@ -23,11 +23,11 @@ class PosterListViewModel internal constructor(
     }
 
 
-    fun retry(attemps: Int = 0) {
-        if (numbersOfTries.value != null && numbersOfTries.value!! == 0) {
+    fun tryToFetchPosters(forceDataLoad: Boolean = true) {
+        if (forceDataLoad == false && numbersOfTries.value!= null) {
             return
         }
-        var tries = numbersOfTries.value ?: attemps
+        var tries = numbersOfTries.value ?: 0
         numbersOfTries.value = ++tries
     }
 }

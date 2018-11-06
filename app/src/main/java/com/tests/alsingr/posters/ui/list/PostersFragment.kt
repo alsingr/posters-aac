@@ -1,7 +1,6 @@
 package com.tests.alsingr.posters.ui.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tests.alsingr.posters.adapters.PosterAdapter
-import com.tests.alsingr.posters.data.domain.Poster
-import com.tests.alsingr.posters.data.domain.Resource
-import com.tests.alsingr.posters.data.domain.Status
 import com.tests.alsingr.posters.databinding.FragPostersBinding
 import com.tests.alsingr.posters.ui.shared.RetryCallback
 import com.tests.alsingr.posters.utilities.InjectorUtils
 import com.tests.alsingr.posters.viewmodels.PosterListViewModel
-import timber.log.Timber
 
 
 class PostersFragment : Fragment() {
@@ -41,7 +36,7 @@ class PostersFragment : Fragment() {
 
         binding.retryCallback = object : RetryCallback {
             override fun retry() {
-                viewModel.retry()
+                viewModel.tryToFetchPosters()
             }
         }
 
@@ -55,6 +50,6 @@ class PostersFragment : Fragment() {
                 binding.hasPosters = false
             }
         })
-        viewModel.retry()
+        viewModel.tryToFetchPosters(forceDataLoad = false)
     }
 }
