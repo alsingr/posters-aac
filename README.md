@@ -8,6 +8,9 @@ Le developpement de cette application a été guidé par les bonnes pratiques An
 Ce project utilise Gradle
 
 # Screenshots
+![alt text](https://github.com/alsingr/posters-aac/blob/master/screenshots/app1.jpg)
+![alt text](https://github.com/alsingr/posters-aac/blob/master/screenshots/app2.jpg)
+![alt text](https://github.com/alsingr/posters-aac/blob/master/screenshots/app3.jpg)
 
 # Librairies utilisées
 * Architecture : Android Architecture Components pour faciliter la gestion des configurations et la persistance des données
