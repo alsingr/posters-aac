@@ -44,7 +44,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/posters_empty"
-                app:visibleGone="@{!hasPosters}"
+                app:visibleGone="@{!hasPosters &amp;&amp; postersResource.status == Status.SUCCESS}"
                 android:textSize="24sp" />
 
         <include

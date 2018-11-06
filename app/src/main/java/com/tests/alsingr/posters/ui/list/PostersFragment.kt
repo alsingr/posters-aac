@@ -47,7 +47,6 @@ class PostersFragment : Fragment() {
 
         viewModel.posters.observe(viewLifecycleOwner, Observer { posters ->
             binding.postersResource = posters
-            Log.d("JJJ", posters.toString())
             if (posters.data != null && posters.data.isNotEmpty()) {
                 binding.hasPosters = true
                 adapter.submitList(posters.data)
@@ -55,37 +54,7 @@ class PostersFragment : Fragment() {
                 // display no posters message
                 binding.hasPosters = false
             }
-//            when (posters.status) {
-//                Status.SUCCESS -> displayPostersIfNeeded(binding, posters.data, adapter)
-//                Status.LOADING -> displayLoadingMessage(binding)
-//                Status.ERROR -> displayErrorMessage(binding)
-//            }
         })
         viewModel.retry()
     }
-
-//    private fun displayPostersIfNeeded(binding: FragPostersBinding, data: List<Poster>?, adapter: PosterAdapter) {
-//        binding.isFinishedWithError = false
-//        binding.isLoading = false
-//        if (data != null && data.isNotEmpty()) {
-//            binding.hasPosters = true
-//            adapter.submitList(data)
-//        }else {
-//            // display no posters message
-//            binding.hasPosters = false
-//        }
-//    }
-//
-//    private fun displayErrorMessage(binding: FragPostersBinding) {
-//        binding.isFinishedWithError = true
-//        binding.isLoading = false
-//        binding.hasPosters = true
-//    }
-//
-//    private fun displayLoadingMessage(binding: FragPostersBinding) {
-//        binding.isLoading = true
-//        binding.isFinishedWithError = false
-//        binding.hasPosters = true
-//    }
-
 }
