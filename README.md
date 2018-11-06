@@ -12,7 +12,7 @@ Ce project utilise Gradle
 # Librairies utilisées
 * Architecture : Android Architecture Components
   * Data Binding : pour lier une vue à des données afin de faciliter sa mise à jour. 
-  * LiveData : Pour notifier les changements à d'autres composants et gérer le cycle de vie des composants de l'app : fragment, activity etc. Aussi ça évite les fuites mémoires, certains crash. Ainsi, ce composant trace les événements comme la rotation d'un device
+  * LiveData : Pour notifier les changements à d'autres composants et gérer le cycle de vie des composants de l'app : fragment, activity etc. Aussi il nous permet d'éviter des fuites mémoires, certains crash. Ainsi, ce composant trace les événements comme la rotation d'un device
   * Navigation : pour faciliter la navigation dans l'app
   * Room : Pour gérer la persistance des données
   * ViewModel
