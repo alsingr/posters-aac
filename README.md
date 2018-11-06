@@ -5,7 +5,7 @@ S'il n'y a pas de données en local au lancement de l'application, alors les don
 Le developpement de cette application a été guidé par les bonnes pratiques Android JetPack.
 
 # Pour commencer
-Ce project utilise Gradle
+Ce project utilise Gradle. Vous pouvez aussi utiliser l'option "Import Project" dans Android Studio
 
 # Screenshots
 ![alt text](https://github.com/alsingr/posters-aac/blob/master/screenshots/app1.jpg)
